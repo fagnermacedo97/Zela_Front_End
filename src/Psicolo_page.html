@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zela - Dashboard</title>
+    <link rel="stylesheet" href="css/tela.css">
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+    <img src="img/Zela_logo_padrao_rose.svg" alt="Logo Zela" style="height:60px; border-radius:10px;">
+    <span style="font-size:14px;">
+        Status: <strong style="color:var(--verde-ativo);">● Ativo</strong>
+    </span>
+</header>
+
+<!-- ===== LAYOUT ===== -->
+<div class="content-wrapper">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-header-title">DASHBOARD</div>
+        <nav>
+            <a href="#" class="nav-link active" onclick="trocarTela('inicio', this); return false;">Início</a>
+            <a href="#" class="nav-link" onclick="trocarTela('solicitacoes', this); return false;">Solicitações</a>
+            <a href="#" class="nav-link" onclick="trocarTela('atendimento', this); return false;">Atendimentos</a>
+            <a href="#" class="nav-link" onclick="trocarTela('historicos', this); return false;">Históricos</a>
+        </nav>
+        <button id="btn-toggle" onclick="toggleSidebar()">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        </button>
+    </aside>
+
+    <!-- CONTEÚDO DINÂMICO -->
+    <main id="tela-principal">
+
+        <!-- SEÇÃO INÍCIO -->
+        <section id="secao-inicio" class="tela-conteudo">
+            <div class="dash-layout">
+
+                <div class="col-perfil">
+                    <!-- Título movido para cima da foto -->
+                    <h1 class="titulo-sessao-canto">INÍCIO</h1>
+
+                    <div class="avatar-circulo">
+                        <img src="https://img.freepik.com/vetores-premium/avatar-de-personagem-feminina-bonito-estilo-3d-isolado-no-fundo-branco_764382-16301.jpg"
+                             alt="Psicóloga">
+                    </div>
+                    <h2 class="saudacao">Olá, Dr(a). [nome]</h2>
+                    <p class="sub-saudacao">Bem vindo, novamente!</p>
+                    <p class="crp-texto"><strong>CRP: 00/0000</strong></p>
+                </div>
+
+                <div class="col-stats">
+                    <!-- Título removido daqui para não ficar duplicado -->
+                    <div class="calendario-container">
+                        <div class="calendario-cor" id="calendar-wrapper"></div>
+                    </div>
+                    <div class="stats-list">
+                        <div class="stat-row">
+                            <span>Atendimentos Em Espera:</span>
+                            <strong id="contagem-espera">4</strong>
+                        </div>
+                        <div class="stat-row">
+                            <span>Atendimentos Concluídos:</span>
+                            <strong>00</strong>
+                        </div>
+                        <div class="stat-row">
+                            <span>Relatórios Enviados:</span>
+                            <strong>00</strong>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO SOLICITAÇÕES -->
+        <section id="secao-solicitacoes" class="tela-conteudo";>
+            <div class="solicitacoes-main">
+                <h1 class="solicitacoes-title">SOLICITAÇÕES DE CHAT</h1>
+                <div class="solicitacoes-grid">
+                    <div class="sol-col" id="col-esquerda"></div>
+                    <div class="sol-divider"></div>
+                    <div class="sol-col" id="col-direita"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO ATENDIMENTO -->
+        <section id="secao-atendimento" class="tela-conteudo";>
+            <div class="chat-container">
+
+                <div class="balao-wrapper paciente-wrapper">
+                    <div class="avatar-chat">P</div>
+                    <div class="balao paciente-msg">
+                        <small>Paciente</small>
+                        Preciso de ajuda, estou com medo...
+                    </div>
+                </div>
+
+                <div class="balao-wrapper psicologo-wrapper">
+                    <div class="avatar-chat">Dr</div>
+                    <div class="balao psicologo-msg">
+                        <small>Psicóloga</small>
+                        Olá! Estou aqui com você. Me conta o que está acontecendo.
+                    </div>
+                </div>
+
+                <div class="chat-footer-meia-tela">
+                    <textarea id="msgInput" class="chat-input"
+                              placeholder="Digite sua mensagem..." rows="2"
+                              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();enviarMensagem();}">
+                    </textarea>
+                    <button class="btn-enviar-chat" onclick="enviarMensagem()">Enviar</button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO HISTÓRICOS -->
+        <section id="secao-historicos" class="tela-conteudo";>
+            <div class="tela-prontuario">
+                <h2 class="titulo-sessao-prontuario">Prontuário Digital</h2>
+                <div class="campos-container-prontuario">
+                    <div class="linha-prontuario">
+                        <label>Paciente:</label>
+                        <div class="box-info-prontuario">[nome_usuário]</div>
+                    </div>
+                    <div class="linha-prontuario">
+                        <label>CPF:</label>
+                        <div class="box-info-prontuario">000.000.000-00</div>
+                    </div>
+                    <div class="linha-prontuario">
+                        <label>Data de Nascimento:</label>
+                        <div class="box-info-prontuario">00/00/0000</div>
+                    </div>
+                </div>
+                <h3 class="titulo-sessao-prontuario" style="font-size:16px;">RELATÓRIO DE ATENDIMENTO</h3>
+                <div class="relatorio-box-prontuario">
+                    <textarea placeholder="Paciente relatou..."></textarea>
+                    <button class="btn-salvar-final" onclick="enviarProntuario()">Salvar</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script src="js/Tela_psicologo.js"></script>
+</body>
+</html>
